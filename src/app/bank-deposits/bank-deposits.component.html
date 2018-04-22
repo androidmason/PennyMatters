@@ -1,0 +1,34 @@
+<mat-form-field>
+  <mat-select  placeholder="Type of bank deposit"  [ngModel]="bankDeposits?.depositType" (ngModelChange)="bankDeposits.depositType=$event">
+    <mat-option *ngFor="let deposit of deposits" [value]="deposit.value">
+      {{ deposit.viewValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br/>
+
+<mat-form-field name="amount" ngDefaultControl class="example-full-width" *ngIf="bankDeposits?.depositType" [ngModel]="bankdeposits?.depositAmount" (ngModelChange)="bankDeposits.depositAmount=$event">
+    <input matInput placeholder="Deposit amount" type="number" (change)="calculateMaturityAmount()">
+</mat-form-field>
+<br/>
+
+<mat-form-field class="example-full-width" ngDefaultControl *ngIf="bankDeposits?.depositAmount" [ngModel]="bankDeposits?.rateOfInterest"  (ngModelChange)="bankDeposits.rateOfInterest=$event" >
+    <input matInput placeholder="Rate of Interest" type="number" (change)="calculateMaturityAmount()">
+</mat-form-field>
+<br/>
+
+<mat-form-field class="example-full-width" ngDefaultControl *ngIf="bankDeposits?.rateOfInterest" [ngModel]="bankDeposits?.tenure" (ngModelChange)="bankDeposits.tenure=$event">
+  <input matInput placeholder="Tenure (In months)" type="number" (change)="calculateMaturityAmount()">
+</mat-form-field>
+<br/>
+
+<mat-form-field class="example-full-width" ngDefaultControl *ngIf="bankDeposits?.maturityAmount">
+  <input matInput type="text" value="Your maturity value is {{bankDeposits?.maturityAmount}}">
+</mat-form-field>
+<br/>
+
+<button (click)="save()">save</button>
+
+
+
+
