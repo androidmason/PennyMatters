@@ -30,7 +30,24 @@ export class BankDepositsComponent implements OnInit {
       this.bankDeposits.maturityAmount = +this.bankDeposits.depositAmount + (+this.bankDeposits.depositAmount * (+this.bankDeposits.tenure/12) * (+this.bankDeposits.rateOfInterest/100));
       }
       if(this.bankDeposits.depositType == 'rd'){
-        
+        /*
+        * Amount = P*(1+r/n)^nt
+        * P: Principle
+        * r: Rate
+        * n: number of quaters(compound frequency)
+        * t: time duration in month
+        */
+       let amount = 0;
+       let noOfQuaters = 12 / 3; // Since RD is compounded quaterly
+       let yearsLeft;
+       let rateOfIntrest = (this.bankDeposits.rateOfInterest)/100;
+
+        for(let index = 0; index< this.bankDeposits.tenure; index++)
+        {
+          yearsLeft = (this.bankDeposits.tenure - index) / 12; // Time left for maturity in years 
+          amount += this.bankDeposits.depositAmount * Math.pow((1 + (rateOfIntrest/noOfQuaters)), (noOfQuaters * yearsLeft));
+        }
+        this.bankDeposits.maturityAmount = amount;
       }
   }
 
