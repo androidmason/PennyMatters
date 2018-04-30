@@ -11,9 +11,11 @@ import { BankDeposits } from '../bank-deposits'
 })
 export class BankDepositsComponent implements OnInit {
 
-  bankDeposits:BankDeposits = {};
+  bankDeposits:BankDeposits;
 
-  constructor(private bankDepositsService : BankDepositsService) { }
+  constructor(private bankDepositsService : BankDepositsService) { 
+    this.bankDeposits = new BankDeposits();
+  }
 
   ngOnInit() {
   }
