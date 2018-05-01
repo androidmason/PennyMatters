@@ -1,5 +1,5 @@
 <mat-form-field>
-  <mat-select  placeholder="Type of bank deposit"  [(ngModel)]="bankDeposits.depositType" >
+  <mat-select  placeholder="Type of bank deposit"  [(ngModel)]="bankDeposits.depositType" (ngModelChange)="resetAllFields()" >
     <mat-option *ngFor="let deposit of deposits" [value]="deposit.value">
       {{ deposit.viewValue }}
     </mat-option>

@@ -58,7 +58,7 @@ export class BankDepositsComponent implements OnInit {
             yearsLeft = (this.bankDeposits.tenure - index) / 12; // Time left for maturity in years 
             amount += this.bankDeposits.depositAmount * Math.pow((1 + (rateOfIntrest/noOfQuaters)), (noOfQuaters * yearsLeft));
           }
-          this.bankDeposits.maturityAmount = amount;debugger;
+          this.bankDeposits.maturityAmount = amount;
         }
         this.showMaturityAmount = true;
       }
@@ -72,6 +72,10 @@ export class BankDepositsComponent implements OnInit {
 
   }
 
-
+  resetAllFields(): void {
+    this.bankDeposits.depositAmount = 0;
+    this.bankDeposits.rateOfInterest = 0;
+    this.bankDeposits.tenure = 0;
+  }
 
 }
