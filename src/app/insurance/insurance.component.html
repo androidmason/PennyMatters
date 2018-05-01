@@ -1,0 +1,47 @@
+<br/>
+<br/>
+<mat-form-field>
+  <mat-select  placeholder="Type of insurance"  [ngModel]="insurance?.insuranceType" (ngModelChange)="insurance.insuranceType=$event">
+    <mat-option *ngFor="let insurance of insurances" [value]="insurance.value">
+      {{ insurance.viewValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br/>
+
+<mat-form-field>
+  <mat-select  placeholder="Premium frequency" ngDefaultControl  [ngModel]="insurance?.premiumFrequency" (ngModelChange)="insurance.premiumFrequency=$event">
+    <mat-option *ngFor="let frequency of premiumFrequency" [value]="frequency.value">
+      {{ frequency.viewValue }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<br/>
+
+<mat-form-field>
+  <input matInput [matDatepicker]="picker" placeholder="Premium Date" [ngModel]="insurance?.premiumDate" (ngModelChange)="insurance.premiumDate=$event">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+<br/>
+
+<mat-form-field name="premium" ngDefaultControl class="example-full-width" [ngModel]="insurance?.premiumAmount" (ngModelChange)="insurance.premiumAmount=$event">
+    <input matInput placeholder="Premium amount" type="number">
+</mat-form-field>
+<br/>
+
+<mat-form-field name="term" ngDefaultControl class="example-full-width" [ngModel]="insurance?.policyTerm" (ngModelChange)="insurance.policyTerm=$event">
+  <input matInput placeholder="Policy Term" type="number">
+</mat-form-field>
+<br/>
+
+<mat-form-field name="cover" ngDefaultControl class="example-full-width" [ngModel]="insurance?.cover" (ngModelChange)="insurance.cover=$event">
+  <input matInput placeholder="Cover" type="number">
+</mat-form-field>
+<br/>
+
+
+<button mat-raised-button (click)="save()">Save</button>
+<br/>
+
+
