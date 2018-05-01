@@ -7,13 +7,15 @@ import { BankDepositsComponent } from './bank-deposits/bank-deposits.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'; 
 
 import {MatOptionModule,MatSelectModule,MatInputModule,MatFormFieldModule,
-  MatTabsModule} from '@angular/material';
+  MatTabsModule,MatDatepickerModule,MatNativeDateModule} from '@angular/material';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BankDepositsService } from '../app/bank-deposits.service';
 import {HttpClientModule } from '@angular/common/http';
-import { NavigationComponent } from './navigation/navigation.component'
+import { NavigationComponent } from './navigation/navigation.component';
+import { InsuranceComponent } from './insurance/insurance.component'
+import { InsuranceService } from './insurance.service';
 
 
 
@@ -21,21 +23,23 @@ import { NavigationComponent } from './navigation/navigation.component'
   declarations: [
     AppComponent,
     BankDepositsComponent,
-    NavigationComponent
+    NavigationComponent,
+    InsuranceComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     MatOptionModule,MatSelectModule,MatFormFieldModule,MatInputModule,MatTabsModule,
-    NoopAnimationsModule,
+    NoopAnimationsModule,MatDatepickerModule,MatNativeDateModule,
     HttpClientModule
   ],
   exports:[
-    MatOptionModule,MatSelectModule,MatFormFieldModule,MatInputModule,MatTabsModule
+    MatOptionModule,MatSelectModule,MatFormFieldModule,MatInputModule,MatTabsModule,MatDatepickerModule
   ],
   providers: [
-    BankDepositsService
+    BankDepositsService,
+    InsuranceService
   ],
   bootstrap: [AppComponent]
 })
