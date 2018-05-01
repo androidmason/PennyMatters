@@ -30,7 +30,8 @@ export class InsuranceComponent implements OnInit {
 
   save(): void {
 
-    this.insuranceService;
+    console.log("clicked")
+    this.insuranceService.addInsurance(this.insurance);
 
   }
 

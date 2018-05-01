@@ -7,7 +7,7 @@ import { BankDepositsComponent } from './bank-deposits/bank-deposits.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms'; 
 
 import {MatOptionModule,MatSelectModule,MatInputModule,MatFormFieldModule,
-  MatTabsModule,MatDatepickerModule,MatNativeDateModule} from '@angular/material';
+  MatTabsModule,MatDatepickerModule,MatNativeDateModule,MatButtonModule} from '@angular/material';
 
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -31,11 +31,12 @@ import { InsuranceService } from './insurance.service';
     FormsModule,
     ReactiveFormsModule,
     MatOptionModule,MatSelectModule,MatFormFieldModule,MatInputModule,MatTabsModule,
-    NoopAnimationsModule,MatDatepickerModule,MatNativeDateModule,
+    NoopAnimationsModule,MatDatepickerModule,MatNativeDateModule,MatButtonModule,
     HttpClientModule
   ],
   exports:[
-    MatOptionModule,MatSelectModule,MatFormFieldModule,MatInputModule,MatTabsModule,MatDatepickerModule
+    MatOptionModule,MatSelectModule,MatFormFieldModule,MatInputModule,
+    MatTabsModule,MatDatepickerModule
   ],
   providers: [
     BankDepositsService,
