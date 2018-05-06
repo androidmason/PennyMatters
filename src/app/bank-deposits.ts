@@ -10,9 +10,9 @@ export class BankDeposits {
     constructor () {
         this.id = 1;
         this.depositType = "";
-        this.depositAmount = 0;
-        this.rateOfInterest = 0;
-        this.maturityAmount = 0;
-        this.tenure = 0;
+        this.depositAmount = null;
+        this.rateOfInterest = null;
+        this.maturityAmount = null;
+        this.tenure = null;
     }
 }

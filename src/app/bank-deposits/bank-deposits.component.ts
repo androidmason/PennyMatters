@@ -73,9 +73,9 @@ export class BankDepositsComponent implements OnInit {
   }
 
   resetAllFields(): void {
-    this.bankDeposits.depositAmount = 0;
-    this.bankDeposits.rateOfInterest = 0;
-    this.bankDeposits.tenure = 0;
+    this.bankDeposits.depositAmount = null;
+    this.bankDeposits.rateOfInterest = null;
+    this.bankDeposits.tenure = null;
   }
 
 }
