@@ -27,7 +27,7 @@
 </mat-form-field>
 <br/>
 
-<button *ngIf="bankDeposits.depositType"  (click)="save()">save</button>
+<button [disabled]="!showMaturityAmount"  (click)="save()">save</button>
 
 
 
