@@ -11,9 +11,13 @@ import { BankDeposits } from '../bank-deposits'
 })
 export class BankDepositsComponent implements OnInit {
 
-  bankDeposits:BankDeposits = {};
+  bankDeposits:BankDeposits;
+  showMaturityAmount:Boolean;
 
-  constructor(private bankDepositsService : BankDepositsService) { }
+  constructor(private bankDepositsService : BankDepositsService) { 
+    this.bankDeposits = new BankDeposits();
+    this.showMaturityAmount = false; 
+  }
 
   ngOnInit() {
   }
@@ -25,29 +29,38 @@ export class BankDepositsComponent implements OnInit {
   ];
 
   calculateMaturityAmount(): void {
-      console.log('Computing ' + this.bankDeposits.depositAmount + ' ' + this.bankDeposits.tenure + ' ' + this.bankDeposits.rateOfInterest)
-      if(this.bankDeposits.depositType == 'fd'){
-      this.bankDeposits.maturityAmount = +this.bankDeposits.depositAmount + (+this.bankDeposits.depositAmount * (+this.bankDeposits.tenure/12) * (+this.bankDeposits.rateOfInterest/100));
+      // If all values are entered, then calculate amount else not
+      if (!this.bankDeposits.rateOfInterest || !this.bankDeposits.depositAmount || !this.bankDeposits.tenure)
+      {
+        this.showMaturityAmount = false;
       }
-      if(this.bankDeposits.depositType == 'rd'){
-        /*
-        * Amount = P*(1+r/n)^nt
-        * P: Principle
-        * r: Rate
-        * n: number of quaters(compound frequency)
-        * t: time duration in month
-        */
-       let amount = 0;
-       let noOfQuaters = 12 / 3; // Since RD is compounded quaterly
-       let yearsLeft;
-       let rateOfIntrest = (this.bankDeposits.rateOfInterest)/100;
-
-        for(let index = 0; index< this.bankDeposits.tenure; index++)
-        {
-          yearsLeft = (this.bankDeposits.tenure - index) / 12; // Time left for maturity in years 
-          amount += this.bankDeposits.depositAmount * Math.pow((1 + (rateOfIntrest/noOfQuaters)), (noOfQuaters * yearsLeft));
+      else
+      {
+        console.log('Computing ' + this.bankDeposits.depositAmount + ' ' + this.bankDeposits.tenure + ' ' + this.bankDeposits.rateOfInterest)
+        if(this.bankDeposits.depositType == 'fd'){
+        this.bankDeposits.maturityAmount = +this.bankDeposits.depositAmount + (+this.bankDeposits.depositAmount * (+this.bankDeposits.tenure/12) * (+this.bankDeposits.rateOfInterest/100));
         }
-        this.bankDeposits.maturityAmount = amount;
+        if(this.bankDeposits.depositType == 'rd'){
+          /*
+          * Amount = P*(1+r/n)^nt
+          * P: Principle
+          * r: Rate
+          * n: number of quaters(compound frequency)
+          * t: time duration in month
+          */
+        let amount = 0;
+        let noOfQuaters = 12 / 3; // Since RD is compounded quaterly
+        let yearsLeft;
+        let rateOfIntrest = (this.bankDeposits.rateOfInterest)/100;
+
+          for(let index = 0; index< this.bankDeposits.tenure; index++)
+          {
+            yearsLeft = (this.bankDeposits.tenure - index) / 12; // Time left for maturity in years 
+            amount += this.bankDeposits.depositAmount * Math.pow((1 + (rateOfIntrest/noOfQuaters)), (noOfQuaters * yearsLeft));
+          }
+          this.bankDeposits.maturityAmount = amount;
+        }
+        this.showMaturityAmount = true;
       }
   }
 
@@ -59,6 +72,10 @@ export class BankDepositsComponent implements OnInit {
 
   }
 
-
+  resetAllFields(): void {
+    this.bankDeposits.depositAmount = null;
+    this.bankDeposits.rateOfInterest = null;
+    this.bankDeposits.tenure = null;
+  }
 
 }
