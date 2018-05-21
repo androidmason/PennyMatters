@@ -26,13 +26,14 @@ export class InsuranceComponent implements OnInit {
     {value: 'annual', viewValue: 'Annual'},
     {value: 'oneTime', viewValue: 'One Time'},
     {value: 'monthly', viewValue: 'Monthly'},
+    {value: 'none', viewValue: 'None'}
   ];
 
   save(): void {
-
     console.log("clicked")
-    this.insuranceService.addInsurance(this.insurance);
-
+     let x = this.insuranceService.addInsurance(this.insurance);
+     console.log(" returned")
+     x.subscribe(results => console.log(results.toString))
   }
 
 }

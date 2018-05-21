@@ -3,6 +3,6 @@ export class BankDeposits {
     depositType?: string;
     depositAmount?: number;
     rateOfInterest?: number;
-    maturityAmount?: number;
+    maturityAmount?: string;
     tenure?: number;  
 }

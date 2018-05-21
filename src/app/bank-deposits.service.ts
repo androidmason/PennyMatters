@@ -23,7 +23,7 @@ export class BankDepositsService {
 
   /** PUT: update the hero on the server */
 updateBankDeposits (bankDeposits: BankDeposits): Observable<Object> {
-  return this.http.post("http://localhost:9000/bankdeposits",bankDeposits,httpOptions).pipe(
+  return this.http.post("http://localhost:9000/bankdeposits/add",bankDeposits,httpOptions).pipe(
     tap(count => this.log(" Count is " + count)),
     catchError(this.handleError<any>('Fetch count'))
   )  
