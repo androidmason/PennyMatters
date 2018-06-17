@@ -29,8 +29,18 @@ updateBankDeposits (bankDeposits: BankDeposits): Observable<Object> {
   )  
 }
 
+findDeposits () : Observable<BankDeposits[]> {
+  return this.http
+  .get<BankDeposits[]>("http://localhost:9000/bankdeposits/find",httpOptions)
+  .pipe(
+     tap(count => this.log("fetched data " + count),
+     catchError(this.handleError<any>('Fetched'))
+   ));
+}
+
+
 private log(message: string) {
-  console.log('HeroService: ' + message);
+  console.log('BankService: ' + message);
 }
 
 

@@ -4,5 +4,6 @@ export class BankDeposits {
     depositAmount?: number;
     rateOfInterest?: number;
     maturityAmount?: string;
-    tenure?: number;  
+    tenure?: number;
+    bankName?: string;  
 }

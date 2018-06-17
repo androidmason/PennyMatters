@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Insurance } from './insurance';
-import { Observable } from 'rxjs/Observable';
+import { Observable} from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError , map} from 'rxjs/operators';
+import 'rxjs/add/operator/map';
 
 const httpOptions = {
   headers: new HttpHeaders({ 
@@ -25,8 +26,17 @@ export class InsuranceService {
     )  
   }
 
+  findInsurance () : Observable<Insurance[]> {
+    return this.http
+    .get<Insurance[]>("http://localhost:9000/insurance/find",httpOptions)
+    .pipe(
+       tap(count => this.log("fetched data" + count),
+       catchError(this.handleError<any>('Fetched'))
+     ))
+  }
+
   private log(message: string) {
-    console.log('HeroService: ' + message);
+    console.log('InsuranceService: ' + message);
   }
   
   

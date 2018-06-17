@@ -12,10 +12,13 @@ import { BankDeposits } from '../bank-deposits'
 export class BankDepositsComponent implements OnInit {
 
   bankDeposits:BankDeposits = {};
+  chartData: Object[];
+  drillDownData: Object[];
 
   constructor(private bankDepositsService : BankDepositsService) { }
 
   ngOnInit() {
+    this.fetchData();
   }
 
   deposits = [
@@ -28,7 +31,7 @@ export class BankDepositsComponent implements OnInit {
       console.log('Computing ' + this.bankDeposits.depositAmount + ' ' + this.bankDeposits.tenure + ' ' + this.bankDeposits.rateOfInterest)
       
       let amount = 0;
-      if(this.bankDeposits.depositType == 'fd'){
+      if(this.bankDeposits.depositType == 'fd' || this.bankDeposits.depositType == 'savings'){
         amount = +this.bankDeposits.depositAmount + (+this.bankDeposits.depositAmount * (+this.bankDeposits.tenure/12) * (+this.bankDeposits.rateOfInterest/100));
       }
       if(this.bankDeposits.depositType == 'rd'){
@@ -59,6 +62,88 @@ export class BankDepositsComponent implements OnInit {
       x.subscribe(x => console.log("x"))
 
   }
+
+  fetchData(): void{
+    let fdData: Object[] = new Array() 
+    let rdData: Object[] = new Array()
+    let savingsData : Object[] = new Array()
+    this.bankDepositsService.findDeposits().subscribe(x => {
+       x.forEach(element => {
+          if(element.depositType == 'fd'){
+            fdData.push([element.bankName,+element.maturityAmount])
+          }
+          else if(element.depositType == 'rd'){
+            rdData.push([element.bankName,+element.maturityAmount]) 
+          }
+          else if(element.depositType == 'savings'){
+            savingsData.push([element.bankName,+element.maturityAmount])     
+          }
+          })
+
+          console.log(fdData[0][1])
+
+          this.chartData = new Array()
+          let fdAmount; 
+          if(fdData.length <= 1)
+            fdAmount = fdData[0][1]
+          else 
+            fdAmount = fdData.reduce((a,b) =>parseInt(a[1])+parseInt(b[1]))
+          this.chartData.push( new Object({
+           "name" :  'fd',
+           "y" : +fdAmount,
+           "drillDown" : 'fd'
+         }))
+ 
+         let rdAmount; 
+         if(rdData.length <= 1)
+         rdAmount = rdData[0][1]
+         else 
+         rdAmount = rdData.reduce((a,b) =>parseInt(a[1])+parseInt(b[1]))
+
+         this.chartData.push( new Object({
+           "name" :  'rd',
+           "y" : +rdAmount,
+           "drillDown" : 'rd'
+         }))
+
+         let savingsAmount; 
+         if(savingsData.length <= 1)
+         savingsAmount = savingsData[0][1]
+         else 
+         savingsAmount = savingsData.reduce((a,b) =>parseInt(a[1])+parseInt(b[1]))
+
+ 
+         this.chartData.push( new Object({
+           "name" :  'savings',
+           "y" : +savingsAmount,
+           "drillDown" : 'savings'
+         }))    
+
+        this.drillDownData = new Array
+        this.drillDownData.push({
+          "name" : 'fd',
+          "id" : 'fd',
+          "data" : fdData 
+        })
+
+        this.drillDownData.push({
+          "name" : 'rd',
+          "id" : 'rd',
+          "data" : rdData 
+        })
+
+        this.drillDownData.push({
+          "name" : 'savings',
+          "id" : 'savings',
+          "data" : savingsData 
+        })
+
+
+
+        } 
+      );    
+}
+
 
 
 

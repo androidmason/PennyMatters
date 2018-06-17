@@ -1,0 +1,1 @@
+["{ \"policyTerm\" : \"12\", \"premiumFrequency\" : \"annual\", \"insuranceType\" : \"term\", \"premiumAmount\" : \"123456\", \"cover\" : \"12000000\", \"premiumDate\" : \"2018-05-02T18:30:00.000Z\" }","{ \"policyTerm\" : \"12\", \"premiumFrequency\" : \"oneTime\", \"insuranceType\" : \"term\", \"premiumAmount\" : \"123445\", \"cover\" : \"1200000\" }"]

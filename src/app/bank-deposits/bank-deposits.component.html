@@ -1,3 +1,9 @@
+
+<app-charts *ngIf="chartData"
+[chartData] = "chartData"
+[drillDownData] = "drillDownData">
+</app-charts>
+
 <mat-form-field>
   <mat-select  placeholder="Type of bank deposit"  [ngModel]="bankDeposits?.depositType" (ngModelChange)="bankDeposits.depositType=$event">
     <mat-option *ngFor="let deposit of deposits" [value]="deposit.value">
@@ -7,7 +13,13 @@
 </mat-form-field>
 <br/>
 
-<mat-form-field name="amount" ngDefaultControl class="example-full-width" *ngIf="bankDeposits?.depositType" [ngModel]="bankdeposits?.depositAmount" (ngModelChange)="bankDeposits.depositAmount=$event">
+<mat-form-field name="bank" ngDefaultControl class="example-full-width" [ngModel]="bankdeposits?.bankName" (ngModelChange)="bankDeposits.bankName=$event">
+  <input matInput placeholder="Bank Name" type="text">
+</mat-form-field>
+<br/>
+
+
+<mat-form-field name="amount" ngDefaultControl class="example-full-width" *ngIf="bankDeposits?.bankName" [ngModel]="bankdeposits?.depositAmount" (ngModelChange)="bankDeposits.depositAmount=$event">
     <input matInput placeholder="Deposit amount" type="number" (change)="calculateMaturityAmount()">
 </mat-form-field>
 <br/>

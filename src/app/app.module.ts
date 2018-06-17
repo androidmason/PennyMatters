@@ -16,7 +16,7 @@ import {HttpClientModule } from '@angular/common/http';
 import { NavigationComponent } from './navigation/navigation.component';
 import { InsuranceComponent } from './insurance/insurance.component'
 import { InsuranceService } from './insurance.service';
-
+import { ChartsComponent } from './charts/charts.component';
 
 
 @NgModule({
@@ -24,7 +24,8 @@ import { InsuranceService } from './insurance.service';
     AppComponent,
     BankDepositsComponent,
     NavigationComponent,
-    InsuranceComponent
+    InsuranceComponent,
+    ChartsComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +41,8 @@ import { InsuranceService } from './insurance.service';
   ],
   providers: [
     BankDepositsService,
-    InsuranceService
+    InsuranceService,
+
   ],
   bootstrap: [AppComponent]
 })
